@@ -1,0 +1,75 @@
+import os
+
+TODO_FILE = "todo.txt"
+COMPLETED_FILE = "completed.txt"
+
+def show_menu():
+    print("\n1. View To-Do List")
+    print("2. Add Task")
+    print("3. Mark Task as Completed")
+    print("4. Quit")
+
+def view_file_content(file_path):
+    try:
+        with open(file_path, "r") as file:
+            content = file.readlines()
+        return content
+    except FileNotFoundError:
+        return []
+
+def view_todo_list():
+    tasks = view_file_content(TODO_FILE)
+    if not tasks:
+        print("No tasks in the To-Do List.")
+    else:
+        for i, task in enumerate(tasks, 1):
+            print(f"{i}. {task.strip()}")
+
+def add_task():
+    task = input("Enter the task: ")
+    with open(TODO_FILE, "a") as file:
+        file.write(task + "\n")
+    print("Task added successfully.")
+
+def mark_completed():
+    view_todo_list()
+    try:
+        task_number = int(input("Enter the task number to mark as completed: "))
+        tasks = view_file_content(TODO_FILE)
+
+        if 1 <= task_number <= len(tasks):
+            completed_task = tasks.pop(task_number - 1)
+            with open(TODO_FILE, "w") as file:
+                file.writelines(tasks)
+            with open(COMPLETED_FILE, "a") as completed_file:
+                completed_file.write(completed_task)
+            print("Task marked as completed.")
+        else:
+            print("Invalid task number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
+def main():
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-4): ")
+        if choice == "1":
+            view_todo_list()
+        elif choice == "2":
+            add_task()
+        elif choice == "3":
+            mark_completed()
+        elif choice == "4":
+            print("Exiting the To-Do List application. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+if __name__ == "__main__":
+    if not os.path.exists(TODO_FILE):
+        with open(TODO_FILE, "w"):
+            pass
+    if not os.path.exists(COMPLETED_FILE):
+        with open(COMPLETED_FILE, "w"):
+            pass
+    main()
