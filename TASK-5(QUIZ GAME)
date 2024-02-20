@@ -1,0 +1,24 @@
+import random
+
+class QuizGame:
+    def __init__(self):
+        self.questions = [
+            {"question": "What is the capital of France?", "choices": ["A. Paris", "B. London", "C. Berlin"], "correct_answer": "A"},
+            {"question": "How many continents are there?", "choices": ["A. 5", "B. 6", "C. 7"], "correct_answer": "C"},
+            {"question": "Which planet is known as the Red Planet?", "choices": ["A. Mars", "B. Venus", "C. Jupiter"], "correct_answer": "A"},
+            {"question": "What is the largest mammal on Earth?", "choices": ["A. Elephant", "B. Blue Whale", "C. Giraffe"], "correct_answer": "B"},
+            {"question": "Who wrote 'Romeo and Juliet'?", "choices": ["A. Charles Dickens", "B. William Shakespeare", "C. Jane Austen"], "correct_answer": "B"},
+            {"question": "What is the powerhouse of the cell?", "choices": ["A. Nucleus", "B. Mitochondria", "C. Ribosome"], "correct_answer": "B"},
+            {"question": "What is the square root of 144?", "choices": ["A. 10", "B. 12", "C. 14"], "correct_answer": "B"},
+            # Add more questions as needed
+        ]
+        self.score = 0
+
+    def display_welcome_message(self):
+        print("Welcome to the Quiz Game!")
+        print("Answer the following questions. Let's see how well you know the topic.")
+
+    def display_final_results(self):
+        print("\nFinal Results:")
+        print(f"Your final score is: {self.score}/{len(self.questions)}")
+        print("Thanks for playing!")
